@@ -1,5 +1,5 @@
 """A simple calculator feature tests."""
-
+import re
 from pytest import fixture
 from simple_calculator import SillyCalculator
 from pytest_bdd import (
@@ -21,17 +21,14 @@ def test_adding_two_integers():
     """Adding two integers."""
     pass
 
-
-@given("I have an integer 40")
-def i_have_an_integer_40(silly_calculator):
-    """I have an integer 40."""
-    silly_calculator.first_int = 40
+@given('I have an integer <first>')
+def i_have_an_integer(silly_calculator, first):
+    silly_calculator.first_int = int(first)
 
 
-@given("I have another integer 2")
-def i_have_another_integer_2(silly_calculator):
-    """I have another integer 2."""
-    silly_calculator.second_int = 2
+@given('I have another integer <second>')
+def i_have_another_integer(silly_calculator, second):
+    silly_calculator.second_int = int(second)
 
 
 @when("I add the two integers")
@@ -40,7 +37,6 @@ def i_add_the_two_integers(silly_calculator):
     silly_calculator.add()
 
 
-@then("The result is 42")
-def the_result_is_42(silly_calculator):
-    """The result is 42."""
-    assert 42 == silly_calculator.result
+@then('The result is <sum>')
+def the_result_is(silly_calculator,sum):
+    assert sum == silly_calculator.result
