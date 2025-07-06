@@ -5,3 +5,9 @@ Scenario: Adding two integers
     And I have another integer <second>
     When I add the two integers
     Then The result is <sum>
+
+Examples:
+    | first | second | sum |
+    | 3     | 5      | 8   |
+    | 10    | 15     | 25  |
+    | -2    | 4      | 2   |
